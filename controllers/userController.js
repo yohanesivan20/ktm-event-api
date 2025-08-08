@@ -47,10 +47,10 @@ exports.loginUser = async (req, res) => {
     try {
         const user = await User.findOne({ where: { email:email }})
 
-        if (!user) { response(400, null, "Email atau password tidak sesuai!", res) }
+        if (!user) { response(404, null, "Email atau password tidak sesuai!", res) }
 
         const passwordMatch = await bcrypt.compare(password, user.password)
-        if (!passwordMatch) { response(400, null, "Email atau password tidak sesuai!", res)}
+        if (!passwordMatch) { response(404, null, "Email atau password tidak sesuai!", res)}
 
         const payload = {
             userId: user.id,
